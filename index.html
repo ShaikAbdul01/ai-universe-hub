@@ -17,6 +17,7 @@
       src="https://kit.fontawesome.com/72bddef647.js"
       crossorigin="anonymous"
     ></script>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <header class="container text-center mt-5 mb-5">
@@ -48,8 +49,69 @@
       <!-- loader End-->
 
       <!-- Modal Start  -->
-      <section>
-        
+      <section style="width: '100%'">
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="cardDetails"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          tabindex="-1"
+          aria-labelledby="cardDetailsLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog custom-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <!-- Moderl card start  -->
+                <div class="row row-cols-1 row-cols-md-2 g-4">
+                  <div class="col">
+                    <div class="card h-100">
+                      <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <div
+                          class="d-flex justify-content-between align-items-center gap-2 mt-2 mb-2"
+                        >
+                          <p>$10/month Basic</p>
+                          <p>$10/month Basic</p>
+                          <p>$10/month Basic</p>
+                        </div>
+                        <div
+                          class="d-flex justify-content-between align-items-center gap-2"
+                        >
+                          <div>
+                            <h1>hello</h1>
+                          </div>
+                          <div>
+                            <h1>world</h1>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card h-100">
+                      <img src="..." class="card-img-top" alt="..." />
+                      <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a short card.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Moderl card end  -->
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
       <!-- Modal End  -->
     </main>

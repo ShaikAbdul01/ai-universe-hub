@@ -8,8 +8,8 @@ const showCardDetails = (cards) => {
   // console.log(cards)
   const cardContainer = document.getElementById("card-container");
   cards.tools.forEach((singleCard) => {
-    // console.log(singleCard);
-    const { image, name, features, published_in } = singleCard;
+    // console.log(singleCard.id);
+    const { image, name, features, published_in, id } = singleCard;
     const div = document.createElement("div");
     div.innerHTML = `
        
@@ -32,15 +32,25 @@ const showCardDetails = (cards) => {
                         <p class=""><i class="fa-solid fa-calendar-days"></i> ${published_in}</p>
                     </div>
                     <div class="">
-                        <p class="">➔</p>
+                        <p><span onclick="loadCardDetails('${id}')" data-bs-toggle="modal"
+                        data-bs-target="#cardDetails">➔</span></p>
                     </div>
                     </div>
-
               </div>
             </div>
         
         `;
     cardContainer.appendChild(div);
   });
+};
+
+const loadCardDetails = async (id) => {
+  const url = `https://openapi.programming-hero.com/api/phone/${id}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  showModelCardDetails(data);
+};
+const showModelCardDetails = (data) => {
+  console.log(data);
 };
 loadPage();
