@@ -125,7 +125,7 @@ const showModelCardDetails = (data) => {
                           <div>
                             <h4>Integrations</h4>
                             <ul>
-                            ${data.integrations.map((int)=> `<li>${int}</li>`)}                      
+                            ${data.integrations ? data.integrations?.map((int)=> `<li>${int}</li>`).join(""):"No data Found"}                      
                             </ul>
                           </div>
                         </div>
