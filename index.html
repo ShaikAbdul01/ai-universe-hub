@@ -22,7 +22,7 @@
   <body>
     <header class="container text-center mt-5 mb-5">
       <h1>AI Universe Hub</h1>
-      <button onclick="sortByDate()" class="btn btn-danger">Sort By Date</button>
+      <button id="sortByDate" class="btn btn-danger">Sort By Date</button>
     </header>
     <main class="container mb-5">
       <!-- Card Container Start -->
@@ -32,7 +32,7 @@
       <!-- Card Container End -->
       <!-- See More Button Start  -->
       <section class="text-center">
-        <button id class="btn btn-danger">See More</button>
+        <button id="seeMore" class="btn btn-danger">See More</button>
       </section>
       <!-- See More Button End  -->
       <!-- loader Start-->
@@ -136,28 +136,9 @@
     ></script>
   </body>
 </html>
-<!-- <div class="d-flex justify-content-between align-items-center">
-  <div class="">
-    <h5 class=""></h5>
-    <p class=""></p>
-  </div>
-  <div class="">
-    <p class=""></p>
-  </div>
-</div> -->
-
-<!-- <li>${
-  features.feature_name
-    ? features.feature_name
-    : "No data Found"
-}</li>
-<li>${
-  features.feature_name
-    ? features.feature_name
-    : "No data Found"
-}</li>
-<li>${
-  features.feature_name
-    ? features.feature_name
-    : "No data Found"
-}</li> -->
+<!-- const sort=(data)=>{
+  data.sort(function(a,b){
+    let c=new Date(a.published_in)
+    let d=new Date(b.published_in)
+    return c-d
+  }) -->

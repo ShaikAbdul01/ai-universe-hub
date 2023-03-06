@@ -8,9 +8,20 @@ const showCardDetails = (cards) => {
   // console.log(cards.length)
 
   const cardContainer = document.getElementById("card-container");
-  const newCards=cards.tools.slice(0,60)
-  console.log(newCards)
+  const sort=(data)=>{
+    data.sort(function(a,b){
+      let c=new Date(a.published_in)
+      let d=new Date(b.published_in)
+      return c-d
+    })
+  }
 
+  let newCards=cards.tools.slice(0, 20);
+  // if (cards.tools.length > 6) {
+  //   newCards = cards.tools.slice(0, 6);
+  // } else {
+  //   newCards = cards.tools;
+  // }
   newCards.forEach((singleCard) => {
     const { image, name, features, published_in, id } = singleCard;
     const div = document.createElement("div");
@@ -58,19 +69,8 @@ const showModelCardDetails = (data) => {
   const modal = document.getElementById("modal");
 
   modal.innerHTML = "";
-  // const cardTitle=document.getElementById('cardTitle')
-  // cardTitle.innerText=data.description
-  // const basic=document.getElementById('basic')
-  // basic.innerText=data.pricing[0].price ? data.pricing[0].price: 'Not Found'
-  // const pro=document.getElementById('pro')
-  // pro.innerText=data.pricing[1].price ? data.pricing[1].price:'Not Found'
-  // const features1=document.getElementById('features1')
-  // features1.innerText=features.feature_name
-
   const { tool_name, description, features } = data;
-
   const div = document.createElement("div");
-
   div.innerHTML = `
   <div class="row row-cols-1 row-cols-md-2 g-4 ">
                   <div class="col">
@@ -81,21 +81,15 @@ const showModelCardDetails = (data) => {
                           class="d-flex justify-content-between align-items-center gap-2 mt-2 mb-2"
                         >
                         <p id="basic" class="text-success bg-light p-4">${
-                          data.pricing
-                            ? data.pricing[0].price
-                            : "Not Found"
+                          data.pricing ? data.pricing[0].price : "Not Found"
                         }
                         </p>
                         <p id="pro" class="text-warning bg-light p-4">${
-                          data.pricing
-                            ? data.pricing[1].price
-                            : "Not Found"
+                          data.pricing ? data.pricing[1].price : "Not Found"
                         }
                         </p>
-                        <p class="text-danger bg-light p-4">${
-                          data.pricing
-                            ? data.pricing[2].price
-                            : "Not Found"
+                        <p class="text-danger bg-light p-4 text-xl">${
+                          data.pricing ? data.pricing[2].price : "Not Found"
                         }
                         </p>
                         </div>
@@ -125,7 +119,13 @@ const showModelCardDetails = (data) => {
                           <div>
                             <h4>Integrations</h4>
                             <ul>
-                            ${data.integrations ? data.integrations?.map((int)=> `<li>${int}</li>`).join(""):"No data Found"}                      
+                            ${
+                              data.integrations
+                                ? data.integrations
+                                    ?.map((int) => `<li>${int}</li>`)
+                                    .join("")
+                                : "No data Found"
+                            }                      
                             </ul>
                           </div>
                         </div>
@@ -134,7 +134,10 @@ const showModelCardDetails = (data) => {
                   </div>
                   <div class="col">
                     <div class="card h-100">
-                    <span class="badge bg-danger w-25">${data.accuracy.score && data.accuracy.score*100 + '% accuracy' }</span>
+                    <span class="badge bg-danger w-25">${
+                      data.accuracy.score &&
+                      data.accuracy.score * 100 + "% accuracy"
+                    }</span>
                       <img class="p-3" src="${
                         data.image_link[0]
                       }" class="card-img-top" alt="..." />
@@ -150,4 +153,10 @@ const showModelCardDetails = (data) => {
 
   modal.appendChild(div);
 };
-loadPage('');
+
+// document.getElementById("seeMore").addEventListener("click", function () {
+//   cards.tools.forEach((singleCard) => {
+//     console.log(singleCard)
+//   });
+// });
+loadPage("");
