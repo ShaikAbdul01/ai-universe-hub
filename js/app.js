@@ -211,12 +211,11 @@ const showModelCardDetails = (data) => {
                   <div class="col">
                     <div class="card h-100">
                     <div class="text-end">
-                    <span class="badge bg-danger w-25 ">${
+                    <span class="badge bg-danger w-25">${
                       data.accuracy.score &&
                       data.accuracy.score * 100 + "% accuracy"
                     }</span>
-                    </div>
-                    
+                    </div>                    
                       <img class="px-3" src="${
                         data.image_link[0]
                       }" class="card-img-top" alt="..." />
