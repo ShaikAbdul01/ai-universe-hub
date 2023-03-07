@@ -150,7 +150,7 @@ const showModelCardDetails = (data) => {
                       <div class="card-body">
                         <h5 id="" class="card-title">${description}</h5>
                         <div 
-                          class="d-flex justify-content-between align-items-center gap-2 mt-2 mb-2"
+                          class="row-md-3 d-lg-flex gap-2 mt-4 mb-2 text-center"
                         >
                         <p id="basic" class="text-success bg-light p-4">${
                           data.pricing
