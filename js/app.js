@@ -4,62 +4,127 @@ const loadPage = async () => {
   const data = await res.json();
   showCardDetails(data.data);
 };
+
+let newCards;
+let secondCard;
+
+const cardContainer = document.getElementById("card-container");
 const showCardDetails = (cards) => {
-  // console.log(cards.length)
-
-  const cardContainer = document.getElementById("card-container");
-
-  const sorted = () => {
-    cards.tools.sort(function (a, b) {
-      let c = new Date(a.published_in);
-      let d = new Date(b.published_in);
-      return c - d;
+  newCards = cards.tools.slice(0, 6);
+  const seeMore = document.getElementById("seeMore");
+  seeMore.addEventListener("click", function () {
+    cardContainer.innerHTML = "";
+    newCards = cards.tools.slice(0, cards.tools.length);
+    newCards?.forEach((singleCard) => {
+      const { image, name, features, published_in, id } = singleCard;
+      const div = document.createElement("div");
+      div.innerHTML = `           
+                <div class="col">
+                  <div class="card h-100">
+                    <img src="${image}" class="card-img-top p-3" alt="..." height="300">
+                    <div class="card-body">
+                      <h5 class="card-title">Features</h5>
+                      <ol>
+                        <li>${features[0] ? features[0] : "Not available"}</li>
+                        <li>${features[1] ? features[1] : "Not available"}</li>
+                        <li>${features[2] ? features[2] : "Not available"}</li>
+                    </ol>
+                    <hr>
+                    </div>
+    
+                    <div class="d-flex justify-content-between align-items-center mx-4">
+                            <div class="">
+                            <h5 class="">${name}</h5>
+                            <p class=""><i class="fa-solid fa-calendar-days"></i> ${published_in}</p>
+                        </div>
+                        <div class="text-danger">
+                            <p><span onclick="loadCardDetails('${id}')" data-bs-toggle="modal"
+                            data-bs-target="#cardDetails">➔</span></p>
+                        </div>
+                        </div>
+                  </div>
+                </div>
+            
+            `;
+      cardContainer.appendChild(div);
+      seeMore.style.display = "none";
     });
-  };
-  document.getElementById("sortByDate").addEventListener("click", sorted);
-  let newCards = cards.tools.slice(0, 6);
+  });
 
-  // if (cards.tools.length > 6) {
-  //   newCards = cards.tools.slice(0, 6);
-  // } else {
-  //   newCards = cards.tools;
-  // }
+  document.getElementById("sortByDate").addEventListener("click", function () {
+    secondCard = newCards?.sort(
+      (a, b) =>
+        new Date(a.published_in).getTime() - new Date(b.published_in).getTime()
+    );
+    cardContainer.innerHTML = "";
+    secondCard?.forEach((singleCard) => {
+      const { image, name, features, published_in, id } = singleCard;
+      const div = document.createElement("div");
+      div.innerHTML = `
+           
+                <div class="col">
+                  <div class="card h-100">
+                    <img src="${image}" class="card-img-top p-3" alt="..." height="300">
+                    <div class="card-body">
+                      <h5 class="card-title">Features</h5>
+                      <ol>
+                        <li>${features[0] ? features[0] : "Not available"}</li>
+                        <li>${features[1] ? features[1] : "Not available"}</li>
+                        <li>${features[2] ? features[2] : "Not available"}</li>
+                    </ol>
+                    <hr>
+                    </div>
+    
+                    <div class="d-flex justify-content-between align-items-center mx-4">
+                            <div class="">
+                            <h5 class="">${name}</h5>
+                            <p class=""><i class="fa-solid fa-calendar-days"></i> ${published_in}</p>
+                        </div>
+                        <div class="text-danger">
+                            <p><span onclick="loadCardDetails('${id}')" data-bs-toggle="modal"
+                            data-bs-target="#cardDetails">➔</span></p>
+                        </div>
+                        </div>
+                  </div>
+                </div>
+            
+            `;
+      cardContainer.appendChild(div);
+    });
+  });
 
-  // document.getElementById("seeMore").addEventListener("click", function () {
-  // });
-  newCards = cards.tools.slice(0, cards.tools.length);
-  newCards.forEach((singleCard) => {
+  newCards?.forEach((singleCard) => {
     const { image, name, features, published_in, id } = singleCard;
     const div = document.createElement("div");
     div.innerHTML = `
-       
-            <div class="col">
-              <div class="card h-100">
-                <img src="${image}" class="card-img-top p-3" alt="..." height="300">
-                <div class="card-body">
-                  <h5 class="card-title">Features</h5>
-                  <ol>
-                    <li>${features[0] ? features[0] : "Not available"}</li>
-                    <li>${features[1] ? features[1] : "Not available"}</li>
-                    <li>${features[2] ? features[2] : "Not available"}</li>
-                </ol>
-                <hr>
+           
+                <div class="col">
+                  <div class="card h-100">
+                    <img src="${image}" class="card-img-top p-3" alt="..." height="300">
+                    <div class="card-body">
+                      <h5 class="card-title">Features</h5>
+                      <ol>
+                        <li>${features[0] ? features[0] : "Not available"}</li>
+                        <li>${features[1] ? features[1] : "Not available"}</li>
+                        <li>${features[2] ? features[2] : "Not available"}</li>
+                    </ol>
+                    <hr>
+                    </div>
+    
+                    <div class="d-flex justify-content-between align-items-center mx-4">
+                            <div class="">
+                            <h5 class="">${name}</h5>
+                            <p class=""><i class="fa-solid fa-calendar-days"></i> ${published_in}</p>
+                        </div>
+                        <div class="text-danger">
+                            <p><span onclick="loadCardDetails('${id}')" data-bs-toggle="modal"
+                            data-bs-target="#cardDetails">➔</span></p>
+                        </div>
+                        </div>
+                  </div>
                 </div>
-
-                <div class="d-flex justify-content-between align-items-center mx-4">
-                        <div class="">
-                        <h5 class="">${name}</h5>
-                        <p class=""><i class="fa-solid fa-calendar-days"></i> ${published_in}</p>
-                    </div>
-                    <div class="text-danger">
-                        <p><span onclick="loadCardDetails('${id}')" data-bs-toggle="modal"
-                        data-bs-target="#cardDetails">➔</span></p>
-                    </div>
-                    </div>
-              </div>
-            </div>
-        
-        `;
+            
+            `;
     cardContainer.appendChild(div);
   });
 };
@@ -70,6 +135,7 @@ const loadCardDetails = async (id) => {
   const data = await res.json();
   showModelCardDetails(data.data);
 };
+
 const showModelCardDetails = (data) => {
   console.log(data);
   const modal = document.getElementById("modal");
@@ -151,7 +217,7 @@ const showModelCardDetails = (data) => {
                     }</span>
                     </div>
                     
-                      <img class="p-3" src="${
+                      <img class="px-3" src="${
                         data.image_link[0]
                       }" class="card-img-top" alt="..." />
                       
@@ -166,10 +232,4 @@ const showModelCardDetails = (data) => {
 
   modal.appendChild(div);
 };
-
-// document.getElementById("seeMore").addEventListener("click", function () {
-//   cards.tools.forEach((singleCard) => {
-//     console.log(singleCard)
-//   });
-// });
 loadPage("");
