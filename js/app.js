@@ -8,20 +8,26 @@ const showCardDetails = (cards) => {
   // console.log(cards.length)
 
   const cardContainer = document.getElementById("card-container");
-  const sort=(data)=>{
-    data.sort(function(a,b){
-      let c=new Date(a.published_in)
-      let d=new Date(b.published_in)
-      return c-d
-    })
-  }
 
-  let newCards=cards.tools.slice(0, 20);
+  const sorted = () => {
+    cards.tools.sort(function (a, b) {
+      let c = new Date(a.published_in);
+      let d = new Date(b.published_in);
+      return c - d;
+    });
+  };
+  document.getElementById("sortByDate").addEventListener("click", sorted);
+  let newCards = cards.tools.slice(0, 6);
+
   // if (cards.tools.length > 6) {
   //   newCards = cards.tools.slice(0, 6);
   // } else {
   //   newCards = cards.tools;
   // }
+
+  // document.getElementById("seeMore").addEventListener("click", function () {
+  // });
+  newCards = cards.tools.slice(0, cards.tools.length);
   newCards.forEach((singleCard) => {
     const { image, name, features, published_in, id } = singleCard;
     const div = document.createElement("div");
@@ -81,14 +87,18 @@ const showModelCardDetails = (data) => {
                           class="d-flex justify-content-between align-items-center gap-2 mt-2 mb-2"
                         >
                         <p id="basic" class="text-success bg-light p-4">${
-                          data.pricing ? data.pricing[0].price : "Not Found"
+                          data.pricing
+                            ? data.pricing[0].price
+                            : "Free cost of basic"
                         }
                         </p>
                         <p id="pro" class="text-warning bg-light p-4">${
-                          data.pricing ? data.pricing[1].price : "Not Found"
+                          data.pricing
+                            ? data.pricing[1].price
+                            : "Free cost of pro"
                         }
                         </p>
-                        <p class="text-danger bg-light p-4 text-xl">${
+                        <p class="text-danger bg-light p-4">${
                           data.pricing ? data.pricing[2].price : "Not Found"
                         }
                         </p>
@@ -97,7 +107,7 @@ const showModelCardDetails = (data) => {
                           class="d-flex justify-content-between align-items-center gap-2"
                         >
                           <div class="modal-features">
-                            <h4 class="">${tool_name}</h4>
+                            <h4 class="">Features</h4>
                             <ul>
                             <li>${
                               features["1"].feature_name
@@ -134,10 +144,13 @@ const showModelCardDetails = (data) => {
                   </div>
                   <div class="col">
                     <div class="card h-100">
-                    <span class="badge bg-danger w-25">${
+                    <div class="text-end">
+                    <span class="badge bg-danger w-25 ">${
                       data.accuracy.score &&
                       data.accuracy.score * 100 + "% accuracy"
                     }</span>
+                    </div>
+                    
                       <img class="p-3" src="${
                         data.image_link[0]
                       }" class="card-img-top" alt="..." />
